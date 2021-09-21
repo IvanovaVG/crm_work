@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block content %}
+ <header class="panel-heading">
+                      All projects List
+                      <span class="pull-right">
+                          <button type="button" id="loading-btn" class="btn btn-warning btn-xs"><i class="fa fa-refresh"></i> Refresh</button>
+                          <a href="{% url 'add_client' %}" class=" btn btn-success btn-xs">Add new client</a>
+                      </span>
+                  </header>
+<div class="container-fluid">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.27.0/feather.min.js" integrity="sha256-xHkYry2yRjy99N8axsS5UL/xLHghksrFOGKm9HvFZIs=" crossorigin="anonymous"></script>
+<div class="container">
+<div class="row">
+     {% for client in clients %}
+    <!-- Start col -->
+    <div class="col-lg-6">
+        <div class="card m-b-30">
+            <div class="card-body py-5">
+                <div class="row">
+                    <div class="col-lg-3 text-center">
+                        <img src="{{client.profile_image.url}}" class="img-fluid mb-3" alt="user" />
+                    </div>
+                    <div class="col-lg-9">
+                        <h4>{{client.first_name}} {{client.last_name}}</h4>
+                        <p>{{client.company.name}}</p>
+                        <p>{{client.company.email}}</p>
+
+                        <div class="table-responsive">
+                            <table class="table table-borderless mb-0">
+                                <tbody>
+                                    <tr>
+                                        <th scope="row" class="p-1">Category :</th>
+                                        <td class="p-1">{{client.position}}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th scope="row" class="p-1">Email:</th>
+                                        <td class="p-1">{{client.email}}</td>
+                                    </tr>
+                                 <tr>
+                                        <th scope="row" class="p-1">Phone :</th>
+                                        <td class="p-1">{{client.phone}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End col -->
+    {% endfor %}
+
+
+
+</div>
+</div>
+    </div>
+{% endblock content %}

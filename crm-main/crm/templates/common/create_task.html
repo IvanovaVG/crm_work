@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container-fluid" xmlns="http://www.w3.org/1999/html">
+
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+
+                    </div>
+       <div class="col-lg-4">
+                <div class="card-box">
+                       <p class="text-muted m-b-30 font-13"></p>
+    <form id="taskForm" method="POST">
+
+
+        <label for="status" >Status: </label>
+         <select name="status" id="status">
+                <option disabled>Choose</option>
+
+                <option value="New">New</option>
+
+            </select>
+        </br>
+        <label for="name">Description</label>
+        <input id="name" type="text" name="name" value="{{ name }}">
+        </br>
+         <label for="executor">Executor: </label>
+            <select name="executor" id="executor">
+                <option disabled>Choose</option>
+                {% for executor in executors %}
+                <option value="{{executor.id}}">{{executor.first_name}} {{executor.last_name}}</option>
+                 {% endfor %}
+            </select>
+
+        </br>
+         <label for="priority">Priority: </label>
+        <select name="priority" id="priority">
+                <option disabled>Choose</option>
+
+                <option value="LP">low priority</option>
+                <option value="MP">medium priority</option>
+                <option value="HP">high priority</option>
+
+            </select>
+        </br>
+         <label for="type_task">Type task: </label>
+       <select  name="type_task" id="type_task">
+                <option disabled>Choose</option>
+
+                <option value="Software">software</option>
+                <option value="Information">information</option>
+                <option value="Consulting">consulting</option>
+           <option value="Product">product</option>
+
+            </select>
+        </br>
+         <label for="dead_line">Dead line: </label>
+        <input id="dead_line" type="date" format="yyyy-mm-dd" name="dead_line" value="{{ dead_line }}">
+        </br>
+         <label for="coast">Coast: </label>
+        <input id="coast" type="text" name="coast" value="{{ coast }}">
+        </br>
+
+        <label for="project">Project: </label>
+            <select name="project" id="project">
+                <option disabled>Choose</option>
+                {% for project in projects %}
+                <option value="{{project.id}}">{{project.name}}</option>
+                 {% endfor %}
+            </select>
+
+        </br>
+        <label for="customer">Customer: </label>
+            <select name="customer" id="customer">
+                <option disabled>Choose</option>
+                {% for customer in customers %}
+                <option value="{{customer.id}}">{{customer.first_name}} {{customer.last_name}}</option>
+                 {% endfor %}
+            </select>
+
+        </br>
+        </br>
+
+    <input type="submit" class="btn btn-success btn-sm waves-effect waves-light" value="Create">
+</form>
+    {% block javascript %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+      $(document).ready(function () {
+          // отслеживаем событие отправки формы
+          $('#taskForm').submit(function () {
+              // создаем AJAX-вызов
+              $.ajax({
+                  data: $(this).serialize(), // получаем данные формы
+                  type: $(this).attr('method'), // GET или POST
+                  url: "{% url 'add_task' %}",
+                  // если успешно, то
+                  success: function (response) {
+                      alert("Added " + response.name);
+                  },
+                  // если ошибка, то
+                  error: function (response) {
+                      // предупредим об ошибке
+                      alert(response.responseJSON.errors);
+                      console.log(response.responseJSON.errors)
+                  }
+              });
+              return false;
+          });
+      })
+  </script>
+{% endblock javascript %}
+
+     </div>
+             </div>
+      </div>
+{% endblock content %}

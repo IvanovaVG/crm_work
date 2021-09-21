@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container-fluid" xmlns="http://www.w3.org/1999/html">
+
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                    </div>
+    <form id="clientForm"  enctype="multipart/form-data" method="post">
+
+         <label for="first_name">First Name: </label>
+           <input id="first_name" type="text" name="first_name" value="{{ first_name }}">
+        </br>
+        <label for="last_name">Last Name: </label>
+           <input id="last_name" type="text" name="last_name" value="{{ last_name }}">
+        </br>
+        <label for="phone">Phone: </label>
+           <input id="phone" type="text" name="phone" value="{{ phone }}">
+        </br>
+        <label for="email">Email: </label>
+           <input id="email" type="text" name="email" value="{{ email }}">
+        </br>
+        <label for="position">Position: </label>
+           <input id="position" type="text" name="position" value="{{ position }}">
+        </br>
+         <label for="company">Company: </label>
+                <select name="company" id="company">
+                <option disabled>Choose</option>
+                {% for company in companies %}
+                 <option value="{{ company.id }}">{{ company.name }}</option>
+                   {% endfor %}
+
+            </select>
+        </br>
+     <label for="sex">Sex: </label>
+                <select name="sex" id="sex">
+                <option disabled>Choose</option>
+
+                   <option value="M">Male</option>
+                    <option value="F">Female</option>
+                    <option value="O">Other</option>
+
+
+            </select>
+        </br>
+    <input type="file" name="profile_image" for="profile_image">
+ </br>
+    <input type="submit" value="OK">
+</form>
+    {% block javascript %}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+      $(document).ready(function () {
+          // отслеживаем событие отправки формы
+          $('#clientForm').submit(function () {
+              // создаем AJAX-вызов
+              $.ajax({
+                  data: $(this).serialize(), // получаем данные формы
+                  type: $(this).attr('method'), // GET или POST
+                  url: "{% url 'create_company' %}",
+                  // если успешно, то
+                  success: function (response) {
+                      alert("Added " + response.name);
+                  },
+                  // если ошибка, то
+                  error: function (response) {
+                      // предупредим об ошибке
+                      alert(response.responseJSON.errors);
+                      console.log(response.responseJSON.errors)
+                  }
+              });
+              return false;
+          });
+      })
+  </script>
+{% endblock javascript %}
+
+     </div>
+{% endblock content %}

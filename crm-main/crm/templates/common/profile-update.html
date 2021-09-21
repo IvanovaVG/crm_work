@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container-fluid">
+    <div class="d-sm-flex align-items-center justify-content-between  mb-4 mt-4">
+        <h1 class="h3 mb-0 text-gray-800"> Profile Update</h1>
+    </div>
+    <div class="row">
+        <div class="col-lg-2"></div>
+            <div class="col-lg-6">
+                <div class="card-box">
+                        <form method="POST" enctype="multipart/form-data">
+                          {% csrf_token %}
+                          {{ user_form | crispy }}
+                          {{ profile_form | crispy }}
+                          <button type="submit" class="btn btn-success btn-block">Save changes</button>
+                         </form>
+                <hr>
+                <div class="text-center">
+                    <a class="small" href="{% url 'dashboard' %}">Back</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

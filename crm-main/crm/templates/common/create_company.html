@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container-fluid" xmlns="http://www.w3.org/1999/html">
+
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                    </div>
+    <form id="companyForm"   method="post">
+
+         <label for="name">Name: </label>
+           <input id="name" type="text" name="name" value="{{ name }}">
+        </br>
+        <label for="description">Description: </label>
+           <input id="description" type="text" name="description" value="{{ description }}">
+        </br>
+
+         <label for="sphere">sphere: </label>
+                <select name="sphere" id="sphere">
+                <option disabled>Choose</option>
+
+                 <option value="IT">IT</option>
+                    <option value="Banks">Banks</option>
+                     <option value="Logistic">Logistic</option>
+
+            </select>
+        </br>
+        <label for="email">Email: </label>
+           <input id="email" type="text" name="email" value="{{ email }}">
+        </br>
+
+
+    <input type="submit" value="OK">
+</form>
+    {% block javascript %}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+      $(document).ready(function () {
+          // отслеживаем событие отправки формы
+          $('#companyForm').submit(function () {
+              // создаем AJAX-вызов
+              $.ajax({
+                  data: $(this).serialize(), // получаем данные формы
+                  type: $(this).attr('method'), // GET или POST
+                  url: "{% url 'create_company' %}",
+                  // если успешно, то
+                  success: function (response) {
+                      alert("Added " + response.name);
+                  },
+                  // если ошибка, то
+                  error: function (response) {
+                      // предупредим об ошибке
+                      alert(response.responseJSON.errors);
+                      console.log(response.responseJSON.errors)
+                  }
+              });
+              return false;
+          });
+      })
+  </script>
+{% endblock javascript %}
+
+     </div>
+{% endblock content %}

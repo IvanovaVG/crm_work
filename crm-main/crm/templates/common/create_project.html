@@ -1,35 +1,46 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="container-fluid" xmlns="http://www.w3.org/1999/html">
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Create project</h1>
+</div>
+<div class="container">
+    <div class="col-lg-6">
+        <div class="card m-b-30">
+            <div class="card-body py-5">
+                    <form id="projectForm"   method="post">
+                      <div class="table-responsive">
+                            <table class="table table-borderless mb-0">
+                                <tbody>
+                                    <tr>
+                                        <th scope="row" class="p-1">Name:</th>
+                                      <td class="p-1"><input id="name" type="text" name="name" value="{{ name }}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="p-1">Description:</th>
+                                      <td class="p-1"><input id="description" type="text" name="description" value="{{ description }}"></td>
+                                    </tr>
+                                 <tr>
+                                        <th scope="row" class="p-1">Client:</th>
+                                      <td class="p-1"><select name="company" id="company">
+                                            <option disabled>Choose</option>
+                                            {% for company in companies %}
+                                            <option value="{{company.id}}">{{company.name}}</option>
+                                             {% endfor %}
+                                        </select>
+                                      </td>
+                                    </tr>
 
+                                </tbody>
+                            </table>
+                        </div>
 
-                    <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-                    </div>
-    <form id="projectForm"   method="post">
-
-         <label for="name">Name: </label>
-           <input id="name" type="text" name="name" value="{{ name }}">
-        </br>
-        <label for="description">Description: </label>
-           <input id="description" type="text" name="description" value="{{ description }}">
-        </br>
-         <label for="company">Client: </label>
-                <select name="company" id="company">
-                <option disabled>Choose</option>
-                {% for company in companies %}
-                <option value="{{company.id}}">{{company.name}}</option>
-                 {% endfor %}
-            </select>
-
-        </br>
-
-
-    <input type="submit" value="OK">
-</form>
+                 <input type="submit" class="btn btn-primary btn-user" value="Create project">
+            </form>
+            </div>
+        </div>
+    </div>
+</div>
     {% block javascript %}
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script>

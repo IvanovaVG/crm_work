@@ -8,56 +8,81 @@
                         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
 
                     </div>
-    <form id="taskForm" method="POST">
-
-
-        <label for="status" >Status: </label>
-         <select name="status" id="status">
-                <option disabled>Choose</option>
-
-                <option value="New">New</option>
-                <option value="InProgress">In progress</option>
-                <option value="Done">Done</option>
-
-            </select>
-        </br>
-
-      <label for="name">Description: </label>
-           <input id="name" type="text" name="name" value="{{ task.name }}" disabled="disabled">
-
-        </br>
-          <label for="executor">Executor: </label>
-           <input id="executor" type="text" name="executor" value="{{ task.executor.first_name }} {{ task.executor.last_name }}" disabled="disabled">
-
-        </br>
-
-       <label for="priority">Priority: </label>
-           <input id="priority" type="text" name="priority" value="{{ task.priority }}" disabled="disabled">
-
-        </br>
-        <label for="type_task">Type task: </label>
-           <input id="type_task" type="text" name="type_task" value="{{ task.type_task }}" disabled="disabled">
-
-        </br>
-
-         <label for="dead_line">Dead line: </label>
-        <input id="dead_line" type="text" format="yyyy-mm-dd" name="dead_line" value="{{ task.dead_line }}" disabled="disabled">
-        </br>
-         <label for="coast">Coast: </label>
-        <input id="coast" type="text" name="coast" value="{{ task.coast }}" disabled="disabled">
-        </br>
-
-         <label for="project">coast: </label>
-        <input id="project" type="text" name="project" value="{{ task.project.name }}" disabled="disabled">
-        </br>
-
-       <label for="customer">Customer: </label>
-        <input id="customer" type="text" name="customer" value="{{ task.customer.first_name }} {{ task.customer.last_name }}" disabled="disabled">
-        </br>
-        </br>
-
-    <input type="submit" value="OK">
+<div class="col-lg-4">
+        <div class="card-box">
+               <p class="text-muted m-b-30 font-13"></p>
+                 <form id="taskForm" method="POST">
+                     <div class="table-responsive">
+                            <table class="table table-borderless mb-0">
+                                <tbody>
+                                    <tr>
+                                        <th scope="row" class="p-1">Status:</th>
+                                        <td class="p-1">
+                                            <select name="status" id="status">
+                                                <option disabled>Choose</option>
+                                                <option value="New">New</option>
+                                                <option value="InProgress">In progress</option>
+                                                <option value="Done">Done</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                     <tr>
+                                        <th scope="row" class="p-1">Description:</th>
+                                        <td class="p-1">
+                                            <input id="name" type="text" name="name" value="{{ task.name }}" disabled="disabled">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="p-1">Executor:</th>
+                                        <td class="p-1">
+                                           <input id="executor" type="text" name="executor" value="{{ task.executor.first_name }} {{ task.executor.last_name }}" disabled="disabled">
+                                        </td>
+                                    </tr>
+                                     <tr>
+                                        <th scope="row" class="p-1">Priority:</th>
+                                        <td class="p-1">
+                                           <input id="priority" type="text" name="priority" value="{{ task.priority }}" disabled="disabled">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="p-1">Type task:</th>
+                                        <td class="p-1">
+                                           <input id="type_task" type="text" name="type_task" value="{{ task.type_task }}" disabled="disabled">
+                                        </td>
+                                    </tr>
+                                     <tr>
+                                        <th scope="row" class="p-1">Dead line:</th>
+                                        <td class="p-1">
+                                           <input id="dead_line" type="text" format="yyyy-mm-dd" name="dead_line" value="{{ task.dead_line }}" disabled="disabled">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="p-1">Coast:</th>
+                                        <td class="p-1">
+                                          <input id="coast" type="text" name="coast" value="{{ task.coast }}" disabled="disabled">
+                                        </td>
+                                    </tr>
+                                <tr>
+                                        <th scope="row" class="p-1">Project:</th>
+                                        <td class="p-1">
+                                          <input id="project" type="text" name="project" value="{{ task.project.name }}" disabled="disabled">
+                                        </td>
+                                    </tr>
+                                  <tr>
+                                        <th scope="row" class="p-1">Customer:</th>
+                                        <td class="p-1">
+                                           <input id="customer" type="text" name="customer" value="{{ task.customer.first_name }} {{ task.customer.last_name }}" disabled="disabled">
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                            </table>
+                        </div>
+    <input type="submit" class="btn btn-primary btn-user" value="Change status">
 </form>
+                 </div>
+        </div>
+    </div>
+</div>
     {% block javascript %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script>
